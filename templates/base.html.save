@@ -1,0 +1,186 @@
+
+{% load meta %}
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head  {% meta_namespaces %}>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139133373-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139133373-1');
+</script>
+  
+  <meta charset="utf-8">
+  {% include "meta/meta.html" %}
+  <title>TechiesTalks</title>
+ <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="techies talks, TechiesTalks, techies, talks, techiestalk, techtalks, technotalks, techtalk, technotalk, technology, technology news, blog website, techiestalks blogs, techiestalk blogs, blogging website, technology blogs, latest tech news, latest technology news, best blogging website, top blogging website, india's best blogging website, latest technology websites,future technology, future tech, programming languages, future programming languages, technohub, technonews,technical reforms ,latest gadgets,upcoming technology,  " name="keywords">
+  <meta content="TechiesTalks is an indigenous platform which strives to provide knowledge about the latest technologies reforms occuring day by day worldwide. We provide a bunch of exploration about the latest technological assets, researches and higher development applications. We are catering to improve the skills of techy readers and to update them about the various technologies. In India, there are a huge number of institutions which are waking up the communities for higher studies and research. A lot of professionals are striving to pool their advanced minds but many of them can't find a right stage to exhibit their sharp skills. So, here at TechiesTalks, we provide you the right platform to polish up your mind about the technologies and to stay updated with the latest news of the techno-world. Backed by a team of experienced professionals, it will be our assiduous effort to convert you into a veteran from a newbie" name="description">
+ 
+   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1118681772925872",
+    enable_page_level_ads: true
+  });
+</script> 
+  <!-- Favicons -->
+  <link href="{% static 'img/logo.png' %}" rel="icon">
+  <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+  <!-- Bootstrap CSS File -->
+  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+
+   <script type="text/javascript">
+        $(document).ready(function(event){
+          $(".reply-btn").click(function(event){
+              $(this).next(".replied-comments").toggle();
+          });
+         });
+      </script>
+</head>
+
+<body id="page-top">
+
+  <!--/ Nav Star /-->
+  <nav   class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll" href="{% url 'home' %}">TechiesTalks</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'home' %}#about">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'home' %}#team">Team</a>
+          </li>
+          <li class="nav-item">
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle " id="navbarDropdownMenuLink" data-value="blogs_info" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false" href="">Blogs</a>
+                <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink">
+          {% for category in categories %}
+          <a class="dropdown-item" href="{% url 'articles:category' category.slug %}">{{category.name}}</a>
+          {% endfor %}
+
+        </div>
+      </li>
+            <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'home' %}#contact">Contact</a>
+          </li>
+
+
+
+        {% if not user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:signup' %}">Register</a>
+        </li>
+        {% else %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+            <i class="fa fa-user" style="margin-right: 5px;"></i>Hello  {{ request.user.username}}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink">
+
+          <a class="dropdown-item">
+            <form classs="logout_link" action ="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token %}
+                <button type ="submit" class="btn btn-link navbar-btn">Logout</button>
+             </form>
+          </a>
+
+
+          <a class="dropdown-item" href="{% url 'articles:create' %}">create Article</a>
+
+        </div>
+      </li>
+      {% endif %}
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+  <!--/ Nav End /-->
+
+
+
+
+    <!--Navbar-->
+
+<!--Navbar -->
+
+            {% block content %}
+
+          {% endblock %}
+
+ <section class="paralax-mf footer-paralax bg-image sect-mt4 route" style="background-image: url(/static/img/overlay-bg.jpg)">
+    <footer>
+      <div class="overlay-mf"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="copyright-box">
+              <p class="copyright">&copy; Copyright <strong>TechiesTalks</strong>. All Rights Reserved</p>
+              <div class="credits">
+                Designed by <a href="#">TechiesTalks</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'lib/popper/popper.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'lib/counterup/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'lib/counterup/jquery.counterup.js' %}"></script>
+  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+  <script src="{% static 'lib/typed/typed.min.js' %}"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="{% static 'contactform/contactform.js' %}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<title> {% if meta.title %}
+{{meta.title}}{{a}}
+{% else %}
+TechiesTalks
+{% endif %}
+</title>
+<meta content="{{meta.title}}" name="title">
+<meta content="{% for i in meta.keywords %}{{i}},{% endfor %}" name="keywords">
+<meta content="{{meta.description|truncatewords:150|safe }}" name="description">
+
+<meta content="{{meta.image}}" name="image">
+<meta content="{{meta.author}}" name="author">
